@@ -8,5 +8,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="client\" />
+  </ItemGroup>
 
 </Project>
