@@ -1,7 +1,9 @@
 ﻿using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data.Repository;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Redis;
 
 namespace API.Extensions
 {
@@ -10,9 +12,15 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,
                 IConfiguration config)
         {
-          
+
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
+                var options = ConfigurationOptions.Parse(config.GetConnectionString("Redis"));
+                return ConnectionMultiplexer.Connect(options);
+            });
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -1,4 +1,6 @@
-﻿namespace Core.Entities.Identity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Core.Entities.Identity
 {
     public class Address
     {
@@ -10,6 +12,6 @@
         public string State { get; set; }
         public string Zipcode { get; set; }
         public string AppUserId { get; set; }
-       // public AppUser AppUser { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
