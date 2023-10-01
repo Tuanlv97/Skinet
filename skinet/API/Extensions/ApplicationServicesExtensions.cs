@@ -1,8 +1,10 @@
 ﻿using API.Errors;
 using Core.Interfaces;
+using Infrastructure.Data;
 using Infrastructure.Data.Repository;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
 namespace API.Extensions
@@ -12,6 +14,11 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,
                 IConfiguration config)
         {
+            services.AddSingleton<IResponseCacheService, ResponseCacheService>();
+            services.AddDbContext<StoreContext>(opt =>
+            {
+                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            });
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
