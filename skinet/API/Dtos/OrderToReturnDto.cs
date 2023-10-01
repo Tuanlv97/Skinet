@@ -1,4 +1,4 @@
-﻿using Core.Entities.Identity;
+﻿using Core.Entities.OrderAggregate;
 using System.Net;
 
 namespace API.Dtos
